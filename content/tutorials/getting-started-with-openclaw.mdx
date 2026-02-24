@@ -1,0 +1,139 @@
+---
+title: "Getting Started with OpenClaw: Complete Setup Guide for Mac, Windows & Linux"
+description: "A comprehensive guide to installing and configuring OpenClaw on any platform. From prerequisites to your first running instance."
+date: "2026-02-15"
+author: "openclw Team"
+tags: ["setup", "beginner", "installation"]
+category: "getting-started"
+---
+
+## What is OpenClaw?
+
+OpenClaw is the fastest-growing open-source AI agent platform, designed to run autonomous tasks on your machine. With over 191,000 GitHub stars and 21,000+ active instances worldwide, it has rapidly become the go-to framework for personal AI automation.
+
+This guide walks you through installing OpenClaw on macOS, Windows, and Linux, then configuring it for first use.
+
+## Prerequisites
+
+Before installing OpenClaw, make sure you have:
+
+- **Node.js 20+** (or Bun 1.1+)
+- **Git** installed and configured
+- **4GB RAM minimum** (8GB recommended)
+- An API key from a supported LLM provider (OpenAI, Anthropic, or local models via Ollama)
+
+## Installation on macOS
+
+The fastest way to install on macOS is via Homebrew:
+
+```bash
+brew install openclaw
+```
+
+Alternatively, you can install from source:
+
+```bash
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+npm install
+npm run build
+npm link
+```
+
+Verify the installation:
+
+```bash
+claw --version
+```
+
+## Installation on Windows
+
+For Windows, we recommend using the official installer or WSL2.
+
+**Option 1: Official installer**
+
+Download the latest `.msi` installer from the OpenClaw releases page and run it. The installer adds `claw` to your PATH automatically.
+
+**Option 2: WSL2**
+
+If you use Windows Subsystem for Linux, follow the Linux instructions below inside your WSL2 environment.
+
+**Option 3: npm**
+
+```bash
+npm install -g openclaw
+```
+
+## Installation on Linux
+
+Most Linux distributions can install via npm:
+
+```bash
+npm install -g openclaw
+```
+
+For Debian/Ubuntu, there is also an official APT repository:
+
+```bash
+curl -fsSL https://repo.openclaw.dev/gpg | sudo gpg --dearmor -o /usr/share/keyrings/openclaw.gpg
+echo "deb [signed-by=/usr/share/keyrings/openclaw.gpg] https://repo.openclaw.dev stable main" | sudo tee /etc/apt/sources.list.d/openclaw.list
+sudo apt update && sudo apt install openclaw
+```
+
+## Initial Configuration
+
+Once installed, run the setup wizard:
+
+```bash
+claw init
+```
+
+This walks you through:
+
+1. **Choosing an LLM provider** — Select OpenAI, Anthropic, or a local model
+2. **Setting your API key** — Stored securely in `~/.config/openclaw/config.yaml`
+3. **Configuring permissions** — Choose what OpenClaw can access (file system, network, etc.)
+4. **Installing starter skills** — Optionally install recommended skills
+
+## Verifying Your Setup
+
+Run a quick test to make sure everything works:
+
+```bash
+claw run "What is 2 + 2?"
+```
+
+If you see a response, congratulations — OpenClaw is up and running!
+
+## Recommended Next Steps
+
+- Browse our [Skills Directory](/skills) to find useful skills
+- Read our guide on [Installing and Managing Skills Safely](/tutorials/install-manage-openclaw-skills)
+- Join the OpenClaw Discord community for support
+
+## Troubleshooting Common Issues
+
+**"Command not found" after installation**
+
+Make sure your npm global bin directory is in your PATH. Run `npm bin -g` to find the path, then add it to your shell profile.
+
+**API key errors**
+
+Double-check your API key in `~/.config/openclaw/config.yaml`. Make sure there are no trailing spaces or line breaks.
+
+**Permission denied errors**
+
+On Linux/macOS, you may need to adjust file permissions:
+
+```bash
+chmod 600 ~/.config/openclaw/config.yaml
+```
+
+**High memory usage**
+
+If OpenClaw is using too much RAM, try reducing the context window size in your config:
+
+```yaml
+model:
+  max_context: 4096
+```

@@ -1,0 +1,133 @@
+---
+title: "How to Install and Manage OpenClaw Skills Safely"
+description: "Learn how to find, install, update, and remove OpenClaw skills while keeping your system secure. Includes tips for vetting skills before installation."
+date: "2026-02-10"
+author: "openclw Team"
+tags: ["skills", "security", "intermediate"]
+category: "skills"
+---
+
+## Understanding OpenClaw Skills
+
+Skills are modular plugins that extend OpenClaw's capabilities. They can automate tasks, connect to external services, process data, and much more. The ClawHub marketplace hosts thousands of community-created skills — but not all of them are safe.
+
+In this guide, you will learn how to safely manage skills and protect yourself from malicious ones.
+
+## Finding Skills
+
+There are several ways to discover skills:
+
+1. **Our curated directory** at [openclw.com/skills](/skills) — every skill is security-vetted
+2. **ClawHub** — the official marketplace at clawhub.io
+3. **GitHub** — many developers publish skills as open-source repositories
+4. **The `claw search` command** — search from your terminal
+
+```bash
+claw search "file organizer"
+```
+
+## Installing Skills
+
+Install a skill from ClawHub:
+
+```bash
+claw install smart-file-organizer
+```
+
+Install from a GitHub repository:
+
+```bash
+claw install github:username/repo-name
+```
+
+Install a specific version:
+
+```bash
+claw install smart-file-organizer@1.2.0
+```
+
+## Security Vetting Checklist
+
+Before installing any skill, run through this checklist:
+
+1. **Check the permissions** — What does the skill need access to?
+   ```bash
+   claw info smart-file-organizer --permissions
+   ```
+
+2. **Review the source code** — Is the repository open-source? Can you read the code?
+
+3. **Check the author** — Is this a known developer or organization?
+
+4. **Look for community reviews** — Check ClawHub ratings and GitHub issues
+
+5. **Use our security ratings** — Visit the skill page on [openclw.com/skills](/skills) for our independent assessment
+
+## Understanding Permission Levels
+
+Skills request different levels of access:
+
+| Permission | Risk Level | Description |
+|-----------|-----------|-------------|
+| File Read | Low | Can read files on your system |
+| File Write | Medium | Can create and modify files |
+| Network | Medium | Can make HTTP requests |
+| Shell Execute | High | Can run system commands |
+| Full System | Critical | Unrestricted system access |
+
+**Our recommendation**: Avoid skills that request Shell Execute or Full System access unless you fully trust the author and have reviewed the source code.
+
+## Managing Installed Skills
+
+List all installed skills:
+
+```bash
+claw skills list
+```
+
+Update a specific skill:
+
+```bash
+claw skills update smart-file-organizer
+```
+
+Update all skills:
+
+```bash
+claw skills update --all
+```
+
+Remove a skill:
+
+```bash
+claw skills remove smart-file-organizer
+```
+
+## Configuring Skill Permissions
+
+You can restrict what a skill can do even after installation:
+
+```bash
+claw skills config smart-file-organizer --set permissions.network=false
+```
+
+Or edit the skill configuration directly in `~/.config/openclaw/skills/smart-file-organizer/config.yaml`.
+
+## Warning Signs of Malicious Skills
+
+Watch out for these red flags:
+
+- **Obfuscated code** — If you cannot read the source, do not install it
+- **Excessive permissions** — A note-taking app should not need shell access
+- **No source repository** — Legitimate skills typically have public repos
+- **Very new with no reviews** — Be cautious with brand-new skills
+- **Requests API keys or passwords** — Skills should use OAuth, not direct credentials
+
+## What To Do If You Installed a Malicious Skill
+
+If you suspect a skill is malicious:
+
+1. Remove it immediately: `claw skills remove <skill-name>`
+2. Check for unauthorized changes: `claw audit --recent`
+3. Rotate any API keys or tokens the skill had access to
+4. Report the skill on ClawHub and in the OpenClaw Discord

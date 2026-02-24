@@ -1,0 +1,175 @@
+---
+title: "OpenClaw WhatsApp Bot: Setup and Configuration Tutorial"
+description: "Step-by-step guide to connecting OpenClaw to WhatsApp. Build an AI-powered chatbot that responds to messages, handles groups, and automates workflows."
+date: "2026-02-05"
+author: "openclw Team"
+tags: ["whatsapp", "bot", "communication", "advanced"]
+category: "integrations"
+---
+
+## Overview
+
+One of the most popular OpenClaw use cases is running an AI-powered WhatsApp bot. The WhatsApp Bridge skill connects OpenClaw to WhatsApp, letting you automate responses, manage groups, and forward notifications.
+
+This tutorial covers the full setup process from start to finish.
+
+## Prerequisites
+
+- OpenClaw installed and configured ([see our setup guide](/tutorials/getting-started-with-openclaw))
+- A WhatsApp Business API account (or a spare phone number for testing)
+- Node.js 20+ installed
+
+## Step 1: Install the WhatsApp Bridge Skill
+
+```bash
+claw install whatsapp-bridge
+```
+
+Verify it is installed:
+
+```bash
+claw skills list | grep whatsapp
+```
+
+## Step 2: Configure WhatsApp Business API
+
+You need a WhatsApp Business API account. There are two approaches:
+
+**Option A: Official Meta Cloud API (Recommended)**
+
+1. Go to the Meta Developer Portal
+2. Create a new app with WhatsApp product
+3. Get your API token and phone number ID
+4. Add these to your OpenClaw config:
+
+```bash
+claw skills config whatsapp-bridge --set api.provider=meta
+claw skills config whatsapp-bridge --set api.token=YOUR_TOKEN
+claw skills config whatsapp-bridge --set api.phone_id=YOUR_PHONE_ID
+```
+
+**Option B: Third-party library (for testing)**
+
+For local testing, the WhatsApp Bridge can use a web-based connection:
+
+```bash
+claw skills config whatsapp-bridge --set api.provider=web
+claw run whatsapp-bridge:connect
+```
+
+This displays a QR code to scan with your WhatsApp mobile app.
+
+## Step 3: Set Up Message Handling
+
+Create a message handler configuration file:
+
+```yaml
+# ~/.config/openclaw/skills/whatsapp-bridge/handlers.yaml
+handlers:
+  - trigger: "!help"
+    response: "Available commands: !help, !status, !ask <question>"
+
+  - trigger: "!status"
+    action: system_status
+
+  - trigger: "!ask"
+    action: ai_respond
+    model: default
+    max_tokens: 500
+
+  - trigger: default
+    action: ai_respond
+    model: default
+    max_tokens: 200
+    context: "You are a helpful assistant responding via WhatsApp. Keep responses brief."
+```
+
+## Step 4: Start the Bot
+
+Launch the WhatsApp bot:
+
+```bash
+claw run whatsapp-bridge:start
+```
+
+For production use, run it as a background service:
+
+```bash
+claw run whatsapp-bridge:start --daemon
+```
+
+## Step 5: Test Your Bot
+
+Send a message to your WhatsApp number:
+
+- Send `!help` to see available commands
+- Send `!ask What is the weather today?` to test the AI response
+- Send any message to test the default handler
+
+## Configuring Group Behavior
+
+By default, the bot responds in private chats only. To enable group support:
+
+```yaml
+# In handlers.yaml
+settings:
+  groups:
+    enabled: true
+    require_mention: true  # Bot only responds when @mentioned
+    allowed_groups:
+      - "My Team Chat"
+      - "Project Updates"
+```
+
+## Setting Up Notification Forwarding
+
+Forward important notifications from other OpenClaw skills to WhatsApp:
+
+```yaml
+# In handlers.yaml
+notifications:
+  forward_to: "+1234567890"  # Your WhatsApp number
+  sources:
+    - skill: api-monitor
+      events: [downtime, recovery]
+    - skill: cron-scheduler
+      events: [failure]
+```
+
+## Security Considerations
+
+The WhatsApp Bridge skill has a **Caution** security rating because it requires:
+
+- Network access for the WhatsApp API
+- Access to your contact list (for group management)
+- Persistent background process
+
+**Recommendations:**
+
+- Use a dedicated phone number, not your personal one
+- Limit the AI model's response scope with clear system prompts
+- Monitor usage via `claw logs whatsapp-bridge`
+- Set rate limits to prevent abuse:
+
+```yaml
+settings:
+  rate_limit:
+    messages_per_minute: 10
+    messages_per_hour: 100
+```
+
+## Troubleshooting
+
+**Bot not responding to messages**
+
+Check that the service is running: `claw status whatsapp-bridge`
+
+Review logs: `claw logs whatsapp-bridge --tail 50`
+
+**QR code expired (web provider)**
+
+Restart the connection: `claw run whatsapp-bridge:reconnect`
+
+**Rate limit errors from Meta API**
+
+The Meta Cloud API has rate limits. Reduce your message frequency or upgrade your API tier.

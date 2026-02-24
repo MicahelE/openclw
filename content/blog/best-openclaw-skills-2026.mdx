@@ -1,0 +1,150 @@
+---
+title: "Best OpenClaw Skills in 2026: Our Top Picks (Security Vetted)"
+description: "A curated list of the best OpenClaw skills in 2026, hand-picked and security-vetted by our team. Covers productivity, development, communication, and automation."
+date: "2026-02-18"
+author: "openclw Team"
+tags: ["skills", "recommendations", "2026"]
+category: "skills"
+---
+
+## Our Vetting Process
+
+Every skill on this list has been through our security review process. We check source code, analyze permission requests, test in sandboxed environments, and monitor community feedback. Only skills that pass all checks earn our recommendation.
+
+Browse the full directory at [openclw.com/skills](/skills).
+
+## Productivity
+
+### Smart File Organizer
+
+**Rating: Safe** | by ClawLabs
+
+Automatically sorts files into folders based on content type, date, and custom rules. We love this one because it only requests file system access — no network, no shell execution.
+
+```bash
+claw install smart-file-organizer
+```
+
+### Email Summarizer
+
+**Rating: Caution** | by InboxZero
+
+Connects to your inbox and generates daily digests with priority sorting. The caution rating is because it requires email account access via OAuth — a significant permission, but handled properly through standard OAuth flows.
+
+```bash
+claw install email-summarizer
+```
+
+### Meeting Notes AI
+
+**Rating: Caution** | by ProductivityAI
+
+Transcribes and summarizes meetings with action item extraction. Requires microphone access and meeting platform integration. Great for teams but review the permissions carefully.
+
+```bash
+claw install meeting-notes-ai
+```
+
+## Development
+
+### Git Autopilot
+
+**Rating: Safe** | by DevToolsOrg
+
+Our top pick for developers. Generates commit messages from diffs, creates PR descriptions, and manages branches intelligently. Only requires Git repository access.
+
+```bash
+claw install git-autopilot
+```
+
+### Code Reviewer Pro
+
+**Rating: Safe** | by ClawLabs
+
+Automated code review that catches bugs, security issues, and style problems. Runs entirely locally against your repository — no data sent externally.
+
+```bash
+claw install code-reviewer-pro
+```
+
+### Log Analyzer
+
+**Rating: Safe** | by DevToolsOrg
+
+AI-powered log analysis that identifies patterns and suggests root causes. Purely read-only file access, making it one of the safest development tools available.
+
+```bash
+claw install log-analyzer
+```
+
+## Communication
+
+### Slack Notifier
+
+**Rating: Safe** | by MsgConnect
+
+Simple, reliable Slack notifications with rich formatting and templates. Only needs a webhook URL — minimal permissions and maximum utility.
+
+```bash
+claw install slack-notifier
+```
+
+### Telegram Bot Framework
+
+**Rating: Safe** | by MsgConnect
+
+Build Telegram bots powered by OpenClaw. Clean API, good documentation, and transparent network-only permissions.
+
+```bash
+claw install telegram-bot-framework
+```
+
+## Automation
+
+### Cron Scheduler
+
+**Rating: Safe** | by AutomateCrew
+
+Schedule any OpenClaw task on a cron-like pattern. Includes a monitoring dashboard and failure notifications. A must-have for anyone running automated workflows.
+
+```bash
+claw install cron-scheduler
+```
+
+### Workflow Automator
+
+**Rating: Caution** | by AutomateCrew
+
+Build complex multi-step workflows with conditional logic. The caution rating reflects its need for network access and service credentials — necessary for its functionality but worth understanding.
+
+```bash
+claw install workflow-automator
+```
+
+## Security
+
+### Vuln Scanner
+
+**Rating: Safe** | by SecureClawTeam
+
+Scan your projects for known vulnerabilities in dependencies and Docker images. Read-only file access plus network for CVE database lookups.
+
+```bash
+claw install vuln-scanner
+```
+
+### Secret Rotator
+
+**Rating: Safe** | by SecureClawTeam
+
+Automatically rotate API keys and tokens on a schedule. Despite handling credentials, this tool is well-designed with proper encryption and audit logging.
+
+```bash
+claw install secret-rotator
+```
+
+## How to Explore More
+
+Our full [Skills Directory](/skills) lets you search, filter by category, and sort by security rating. Every skill includes detailed permission breakdowns and install instructions.
+
+Want these installed and configured for you? Check out our [Setup Service](/setup-service) — our Full Configuration plan includes up to 10 vetted skills.

@@ -1,0 +1,124 @@
+---
+title: "Is OpenClaw Safe? A Complete Security Guide for 2026"
+description: "An honest look at OpenClaw's security model, known risks, and practical steps you can take to use it safely. Covers skills marketplace risks, permission models, and best practices."
+date: "2026-02-20"
+author: "openclw Team"
+tags: ["security", "safety", "guide"]
+category: "security"
+---
+
+## The Short Answer
+
+OpenClaw itself is open-source, well-audited, and generally safe to run. The real risks come from **third-party skills** — and that is where you need to be careful.
+
+## How OpenClaw's Security Model Works
+
+OpenClaw runs on your local machine with the permissions you grant it. At its core, it is a framework that:
+
+1. Takes instructions (via chat, CLI, or API)
+2. Processes them through an LLM
+3. Executes actions via skills and tools
+
+The framework itself has a solid permission model. When you run `claw init`, you configure exactly what OpenClaw can access: file system paths, network access, shell execution, and more.
+
+## The Skills Marketplace Problem
+
+Here is where things get complicated. The ClawHub marketplace hosts over 4,000 skills created by the community. Our research found that approximately **11.3% of marketplace skills** exhibit concerning behavior:
+
+- **Excessive permission requests** — Skills asking for more access than they need
+- **Obfuscated code** — Source code that is intentionally hard to read
+- **Data exfiltration patterns** — Skills that send data to external servers
+- **Supply chain risks** — Dependencies with known vulnerabilities
+
+This does not mean 11.3% are outright malicious, but they warrant caution.
+
+## Practical Security Steps
+
+### 1. Use Vetted Skills
+
+Only install skills from trusted sources. Our [Skills Directory](/skills) includes only security-vetted skills with transparent ratings.
+
+### 2. Review Permissions
+
+Before installing any skill, check what permissions it requests:
+
+```bash
+claw info <skill-name> --permissions
+```
+
+If a file organizer asks for network access, that is a red flag.
+
+### 3. Restrict File System Access
+
+Limit OpenClaw to specific directories rather than giving it full disk access:
+
+```yaml
+# ~/.config/openclaw/config.yaml
+permissions:
+  filesystem:
+    read:
+      - ~/Documents
+      - ~/Projects
+    write:
+      - ~/Documents/openclaw-output
+```
+
+### 4. Enable Audit Logging
+
+Turn on audit logging to track what OpenClaw does:
+
+```yaml
+audit:
+  enabled: true
+  log_path: ~/.config/openclaw/audit.log
+  log_level: detailed
+```
+
+### 5. Use Network Restrictions
+
+Control which domains OpenClaw and its skills can access:
+
+```yaml
+permissions:
+  network:
+    allowed_domains:
+      - api.openai.com
+      - api.anthropic.com
+      - github.com
+```
+
+### 6. Keep OpenClaw Updated
+
+Security patches are released regularly. Update with:
+
+```bash
+claw update
+```
+
+## Known Risk Areas
+
+### LLM Prompt Injection
+
+Like all LLM-based tools, OpenClaw is susceptible to prompt injection attacks. A malicious document could contain hidden instructions that the AI executes. Mitigate this by:
+
+- Limiting file system access
+- Reviewing actions before execution (enable confirmation mode)
+- Not giving OpenClaw access to sensitive credentials
+
+### Skill Supply Chain Attacks
+
+A popular skill could be compromised in an update. Protect yourself by:
+
+- Pinning skill versions
+- Reviewing changelogs before updating
+- Using our curated directory instead of the raw marketplace
+
+### Data Privacy
+
+OpenClaw sends your prompts to an LLM provider. Be mindful of what data you process through it, especially if you use a cloud-based model. For sensitive data, consider running a local model via Ollama.
+
+## Our Recommendation
+
+OpenClaw is a powerful tool that is safe to use **when configured properly**. The key is treating it like any software that runs with elevated permissions: be deliberate about what you grant access to, use vetted skills, and keep everything updated.
+
+If you want help configuring OpenClaw securely, check out our [Setup Service](/setup-service) — security hardening is included in every plan.
