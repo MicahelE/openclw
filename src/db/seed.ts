@@ -1,6 +1,7 @@
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
-import { categories, skills, contacts } from "./schema";
+import { categories, skills } from "./schema";
+import { sql } from "drizzle-orm";
 import path from "path";
 import fs from "fs";
 
@@ -51,14 +52,9 @@ sqlite.exec(`
   );
 `);
 
-// Clear existing data
-sqlite.exec("DELETE FROM skills");
-sqlite.exec("DELETE FROM categories");
-sqlite.exec("DELETE FROM contacts");
-
 const now = new Date().toISOString();
 
-// Seed categories
+// Upsert categories (insert or update on conflict)
 const categoryData = [
   {
     name: "Productivity",
@@ -99,10 +95,15 @@ const categoryData = [
 ];
 
 for (const cat of categoryData) {
-  db.insert(categories).values(cat).run();
+  db.run(sql`INSERT INTO categories (name, slug, description, icon)
+    VALUES (${cat.name}, ${cat.slug}, ${cat.description}, ${cat.icon})
+    ON CONFLICT(slug) DO UPDATE SET
+      name = excluded.name,
+      description = excluded.description,
+      icon = excluded.icon`);
 }
 
-// Seed skills
+// Upsert skills (insert or update on conflict)
 const skillData = [
   {
     name: "Smart File Organizer",
@@ -115,12 +116,10 @@ const skillData = [
     categorySlug: "productivity",
     githubUrl: "https://github.com/clawlabs/smart-file-organizer",
     clawhubUrl: "https://clawhub.io/skills/smart-file-organizer",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "File system read/write",
     installCommand: "claw install smart-file-organizer",
-    featured: true,
-    createdAt: now,
-    updatedAt: now,
+    featured: 1,
   },
   {
     name: "Git Autopilot",
@@ -133,12 +132,10 @@ const skillData = [
     categorySlug: "development",
     githubUrl: "https://github.com/devtoolsorg/git-autopilot",
     clawhubUrl: "https://clawhub.io/skills/git-autopilot",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "Git repository access, GitHub API token",
     installCommand: "claw install git-autopilot",
-    featured: true,
-    createdAt: now,
-    updatedAt: now,
+    featured: 1,
   },
   {
     name: "WhatsApp Bridge",
@@ -151,13 +148,11 @@ const skillData = [
     categorySlug: "communication",
     githubUrl: "https://github.com/msgconnect/whatsapp-bridge",
     clawhubUrl: "https://clawhub.io/skills/whatsapp-bridge",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired:
       "WhatsApp Business API access, network access, contact list",
     installCommand: "claw install whatsapp-bridge",
-    featured: true,
-    createdAt: now,
-    updatedAt: now,
+    featured: 1,
   },
   {
     name: "Code Reviewer Pro",
@@ -169,12 +164,10 @@ const skillData = [
     categorySlug: "development",
     githubUrl: "https://github.com/clawlabs/code-reviewer-pro",
     clawhubUrl: "https://clawhub.io/skills/code-reviewer-pro",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "Repository read access",
     installCommand: "claw install code-reviewer-pro",
-    featured: true,
-    createdAt: now,
-    updatedAt: now,
+    featured: 1,
   },
   {
     name: "Email Summarizer",
@@ -186,12 +179,10 @@ const skillData = [
     categorySlug: "productivity",
     githubUrl: "https://github.com/inboxzero/email-summarizer",
     clawhubUrl: "https://clawhub.io/skills/email-summarizer",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired: "Email account access (OAuth), network access",
     installCommand: "claw install email-summarizer",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Cron Scheduler",
@@ -203,12 +194,10 @@ const skillData = [
     categorySlug: "automation",
     githubUrl: "https://github.com/automatecrew/cron-scheduler",
     clawhubUrl: "https://clawhub.io/skills/cron-scheduler",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "System scheduling, network access for notifications",
     installCommand: "claw install cron-scheduler",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Vuln Scanner",
@@ -220,12 +209,10 @@ const skillData = [
     categorySlug: "security",
     githubUrl: "https://github.com/secureclawteam/vuln-scanner",
     clawhubUrl: "https://clawhub.io/skills/vuln-scanner",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "File system read, network access for CVE database",
     installCommand: "claw install vuln-scanner",
-    featured: true,
-    createdAt: now,
-    updatedAt: now,
+    featured: 1,
   },
   {
     name: "Slack Notifier",
@@ -237,12 +224,10 @@ const skillData = [
     categorySlug: "communication",
     githubUrl: "https://github.com/msgconnect/slack-notifier",
     clawhubUrl: "https://clawhub.io/skills/slack-notifier",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "Slack webhook URL or bot token",
     installCommand: "claw install slack-notifier",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "API Monitor",
@@ -254,12 +239,10 @@ const skillData = [
     categorySlug: "development",
     githubUrl: "https://github.com/devtoolsorg/api-monitor",
     clawhubUrl: "https://clawhub.io/skills/api-monitor",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "Network access, notification channel credentials",
     installCommand: "claw install api-monitor",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Data Pipeline Builder",
@@ -271,13 +254,11 @@ const skillData = [
     categorySlug: "data-analytics",
     githubUrl: "https://github.com/dataflowhq/data-pipeline-builder",
     clawhubUrl: "https://clawhub.io/skills/data-pipeline-builder",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired:
       "Database credentials, file system access, network access",
     installCommand: "claw install data-pipeline-builder",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Meeting Notes AI",
@@ -289,13 +270,11 @@ const skillData = [
     categorySlug: "productivity",
     githubUrl: "https://github.com/productivityai/meeting-notes-ai",
     clawhubUrl: "https://clawhub.io/skills/meeting-notes-ai",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired:
       "Microphone access, calendar integration, meeting platform API",
     installCommand: "claw install meeting-notes-ai",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Docker Deployer",
@@ -307,13 +286,11 @@ const skillData = [
     categorySlug: "development",
     githubUrl: "https://github.com/cloudship/docker-deployer",
     clawhubUrl: "https://clawhub.io/skills/docker-deployer",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired:
       "Docker socket access, cloud provider credentials, network access",
     installCommand: "claw install docker-deployer",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Web Scraper Toolkit",
@@ -325,12 +302,10 @@ const skillData = [
     categorySlug: "automation",
     githubUrl: "https://github.com/dataflowhq/web-scraper-toolkit",
     clawhubUrl: "https://clawhub.io/skills/web-scraper-toolkit",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired: "Network access, file system write",
     installCommand: "claw install web-scraper-toolkit",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Secret Rotator",
@@ -342,13 +317,11 @@ const skillData = [
     categorySlug: "security",
     githubUrl: "https://github.com/secureclawteam/secret-rotator",
     clawhubUrl: "https://clawhub.io/skills/secret-rotator",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired:
       "Cloud provider IAM access, secrets manager access",
     installCommand: "claw install secret-rotator",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Telegram Bot Framework",
@@ -360,12 +333,10 @@ const skillData = [
     categorySlug: "communication",
     githubUrl: "https://github.com/msgconnect/telegram-bot-framework",
     clawhubUrl: "https://clawhub.io/skills/telegram-bot-framework",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "Telegram Bot API token, network access",
     installCommand: "claw install telegram-bot-framework",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "CSV Analyzer",
@@ -377,12 +348,10 @@ const skillData = [
     categorySlug: "data-analytics",
     githubUrl: "https://github.com/dataflowhq/csv-analyzer",
     clawhubUrl: "https://clawhub.io/skills/csv-analyzer",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "File system read",
     installCommand: "claw install csv-analyzer",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
   {
     name: "Workflow Automator",
@@ -394,12 +363,10 @@ const skillData = [
     categorySlug: "automation",
     githubUrl: "https://github.com/automatecrew/workflow-automator",
     clawhubUrl: "https://clawhub.io/skills/workflow-automator",
-    securityRating: "caution" as const,
+    securityRating: "caution",
     permissionsRequired: "Network access, webhook endpoints, service credentials",
     installCommand: "claw install workflow-automator",
-    featured: true,
-    createdAt: now,
-    updatedAt: now,
+    featured: 1,
   },
   {
     name: "Log Analyzer",
@@ -411,17 +378,29 @@ const skillData = [
     categorySlug: "development",
     githubUrl: "https://github.com/devtoolsorg/log-analyzer",
     clawhubUrl: "https://clawhub.io/skills/log-analyzer",
-    securityRating: "safe" as const,
+    securityRating: "safe",
     permissionsRequired: "File system read, optional network for ELK",
     installCommand: "claw install log-analyzer",
-    featured: false,
-    createdAt: now,
-    updatedAt: now,
+    featured: 0,
   },
 ];
 
-for (const skill of skillData) {
-  db.insert(skills).values(skill).run();
+for (const s of skillData) {
+  db.run(sql`INSERT INTO skills (name, slug, description, short_description, author, category_slug, github_url, clawhub_url, security_rating, permissions_required, install_command, featured, created_at, updated_at)
+    VALUES (${s.name}, ${s.slug}, ${s.description}, ${s.shortDescription}, ${s.author}, ${s.categorySlug}, ${s.githubUrl}, ${s.clawhubUrl}, ${s.securityRating}, ${s.permissionsRequired}, ${s.installCommand}, ${s.featured}, ${now}, ${now})
+    ON CONFLICT(slug) DO UPDATE SET
+      name = excluded.name,
+      description = excluded.description,
+      short_description = excluded.short_description,
+      author = excluded.author,
+      category_slug = excluded.category_slug,
+      github_url = excluded.github_url,
+      clawhub_url = excluded.clawhub_url,
+      security_rating = excluded.security_rating,
+      permissions_required = excluded.permissions_required,
+      install_command = excluded.install_command,
+      featured = excluded.featured,
+      updated_at = excluded.updated_at`);
 }
 
 console.log(`Seeded ${categoryData.length} categories and ${skillData.length} skills.`);
