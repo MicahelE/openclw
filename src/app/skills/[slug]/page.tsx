@@ -5,8 +5,12 @@ import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
 export async function generateStaticParams() {
-  const skills = getAllSkills();
-  return skills.map((s) => ({ slug: s.slug }));
+  try {
+    const skills = getAllSkills();
+    return skills.map((s) => ({ slug: s.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({
