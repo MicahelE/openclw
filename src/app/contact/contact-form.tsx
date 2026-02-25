@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/analytics";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -27,12 +28,18 @@ export function ContactForm() {
       });
       if (res.ok) {
         setStatus("success");
+        trackEvent("form_submit", {
+          form_name: "contact",
+          service_type: data.serviceType,
+        });
         form.reset();
       } else {
         setStatus("error");
+        trackEvent("form_error", { form_name: "contact" });
       }
     } catch {
       setStatus("error");
+      trackEvent("form_error", { form_name: "contact" });
     }
   }
 

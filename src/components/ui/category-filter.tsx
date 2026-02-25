@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { trackEvent } from "@/lib/analytics";
 
 type FilterOption = {
   label: string;
@@ -22,8 +23,10 @@ export function CategoryFilter({
     const params = new URLSearchParams(searchParams.toString());
     if (value) {
       params.set(paramName, value);
+      trackEvent("filter_select", { filter_type: paramName, filter_value: value });
     } else {
       params.delete(paramName);
+      trackEvent("filter_clear", { filter_type: paramName });
     }
     router.push(`?${params.toString()}`);
   };

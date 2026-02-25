@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { Analytics } from "@/components/analytics";
+import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -39,7 +42,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
       <body className="flex min-h-screen flex-col">
+        <Analytics />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
