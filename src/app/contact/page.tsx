@@ -16,6 +16,7 @@ export default function ContactPage() {
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       serviceType: (form.elements.namedItem("serviceType") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      website: (form.elements.namedItem("website") as HTMLInputElement).value,
     };
 
     try {
@@ -54,6 +55,10 @@ export default function ContactPage() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <div className="absolute opacity-0 -z-10" aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+          </div>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Name

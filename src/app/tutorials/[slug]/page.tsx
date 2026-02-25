@@ -84,8 +84,8 @@ export default async function TutorialPage({
             datePublished: item.meta.date,
             publisher: {
               "@type": "Organization",
-              name: "openclw.com",
-              url: "https://openclw.com",
+              name: "agentclw.com",
+              url: "https://agentclw.com",
             },
           }),
         }}

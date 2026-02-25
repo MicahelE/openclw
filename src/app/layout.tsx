@@ -5,24 +5,24 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "openclw.com — OpenClaw Resources, Skills & Tutorials",
-    template: "%s | openclw.com — OpenClaw Resources",
+    default: "agentclw.com — OpenClaw Resources, Skills & Tutorials",
+    template: "%s | agentclw.com — OpenClaw Resources",
   },
   description:
     "Curated OpenClaw skills directory, tutorials, and professional setup services. Find security-vetted skills, step-by-step guides, and expert configuration help.",
-  metadataBase: new URL("https://openclw.com"),
+  metadataBase: new URL("https://agentclw.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://openclw.com",
-    siteName: "openclw.com",
-    title: "openclw.com — OpenClaw Resources, Skills & Tutorials",
+    url: "https://agentclw.com",
+    siteName: "agentclw.com",
+    title: "agentclw.com — OpenClaw Resources, Skills & Tutorials",
     description:
       "Curated OpenClaw skills directory, tutorials, and professional setup services.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "openclw.com — OpenClaw Resources",
+    title: "agentclw.com — OpenClaw Resources",
     description:
       "Curated OpenClaw skills directory, tutorials, and professional setup services.",
   },

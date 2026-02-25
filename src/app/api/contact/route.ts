@@ -41,7 +41,11 @@ async function sendNotificationEmail(data: {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, message, serviceType } = body;
+    const { name, email, message, serviceType, website } = body;
+
+    if (website) {
+      return NextResponse.json({ success: true });
+    }
 
     if (!name || !email || !message) {
       return NextResponse.json(

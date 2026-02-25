@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://openclw.com/sitemap.xml",
+    sitemap: "https://agentclw.com/sitemap.xml",
   };
 }

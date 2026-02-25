@@ -4,17 +4,17 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About openclw.com — an independent resource hub for OpenClaw users, providing curated skills, tutorials, and professional setup services.",
+    "About agentclw.com — an independent resource hub for OpenClaw users, providing curated skills, tutorials, and professional setup services.",
 };
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-white">About openclw.com</h1>
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white">About agentclw.com</h1>
 
       <div className="mt-8 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed">
         <p>
-          <strong>openclw.com</strong> is an independent resource hub for the
+          <strong>agentclw.com</strong> is an independent resource hub for the
           OpenClaw community. We are not affiliated with the official OpenClaw
           project &mdash; we are users and enthusiasts who saw a need for curated,
           security-focused resources.
@@ -68,8 +68,8 @@ export default function AboutPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "openclw.com",
-            url: "https://openclw.com",
+            name: "agentclw.com",
+            url: "https://agentclw.com",
             description:
               "Independent resource hub for OpenClaw — curated skills, tutorials, and setup services.",
           }),

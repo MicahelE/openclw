@@ -201,8 +201,8 @@ export default function SetupServicePage() {
               "Professional OpenClaw setup and configuration services.",
             provider: {
               "@type": "Organization",
-              name: "openclw.com",
-              url: "https://openclw.com",
+              name: "agentclw.com",
+              url: "https://agentclw.com",
             },
             offers: [
               {

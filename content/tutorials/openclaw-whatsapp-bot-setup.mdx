@@ -2,7 +2,7 @@
 title: "OpenClaw WhatsApp Bot: Setup and Configuration Tutorial"
 description: "Step-by-step guide to connecting OpenClaw to WhatsApp. Build an AI-powered chatbot that responds to messages, handles groups, and automates workflows."
 date: "2026-02-05"
-author: "openclw Team"
+author: "agentclw Team"
 tags: ["whatsapp", "bot", "communication", "advanced"]
 category: "integrations"
 ---
@@ -130,10 +130,10 @@ Forward important notifications from other OpenClaw skills to WhatsApp:
 notifications:
   forward_to: "+1234567890"  # Your WhatsApp number
   sources:
-    - skill: api-monitor
-      events: [downtime, recovery]
-    - skill: cron-scheduler
-      events: [failure]
+    - skill: deploy-agent
+      events: [failure, rollback]
+    - skill: browse
+      events: [error, timeout]
 ```
 
 ## Security Considerations

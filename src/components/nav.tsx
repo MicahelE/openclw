@@ -21,7 +21,7 @@ export function Nav() {
           href="/"
           className="text-xl font-bold text-purple-700 dark:text-purple-400"
         >
-          openclw<span className="text-amber-500">.com</span>
+          agentclw<span className="text-amber-500">.com</span>
         </Link>
 
         {/* Desktop */}

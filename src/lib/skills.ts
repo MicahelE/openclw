@@ -1,7 +1,11 @@
 import { db } from "@/db";
-import { skills, categories } from "@/db/schema";
+import { skills, categories, contacts } from "@/db/schema";
 import { eq, like, and, or, desc } from "drizzle-orm";
-import type { Skill, Category } from "@/db/schema";
+import type { Skill, Category, Contact } from "@/db/schema";
+
+export function getContacts(): Contact[] {
+  return db.select().from(contacts).orderBy(desc(contacts.createdAt)).all();
+}
 
 export function getAllCategories(): Category[] {
   return db.select().from(categories).all();

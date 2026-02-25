@@ -2,7 +2,7 @@
 title: "How to Install and Manage OpenClaw Skills Safely"
 description: "Learn how to find, install, update, and remove OpenClaw skills while keeping your system secure. Includes tips for vetting skills before installation."
 date: "2026-02-10"
-author: "openclw Team"
+author: "agentclw Team"
 tags: ["skills", "security", "intermediate"]
 category: "skills"
 ---
@@ -17,13 +17,13 @@ In this guide, you will learn how to safely manage skills and protect yourself f
 
 There are several ways to discover skills:
 
-1. **Our curated directory** at [openclw.com/skills](/skills) — every skill is security-vetted
-2. **ClawHub** — the official marketplace at clawhub.io
+1. **Our curated directory** at [agentclw.com/skills](/skills) — every skill is security-vetted
+2. **ClawHub** — the official marketplace at clawhub.ai
 3. **GitHub** — many developers publish skills as open-source repositories
 4. **The `claw search` command** — search from your terminal
 
 ```bash
-claw search "file organizer"
+claw search "memory"
 ```
 
 ## Installing Skills
@@ -31,7 +31,7 @@ claw search "file organizer"
 Install a skill from ClawHub:
 
 ```bash
-claw install smart-file-organizer
+claw install cognitive-memory
 ```
 
 Install from a GitHub repository:
@@ -43,7 +43,7 @@ claw install github:username/repo-name
 Install a specific version:
 
 ```bash
-claw install smart-file-organizer@1.2.0
+claw install cognitive-memory@1.2.0
 ```
 
 ## Security Vetting Checklist
@@ -52,7 +52,7 @@ Before installing any skill, run through this checklist:
 
 1. **Check the permissions** — What does the skill need access to?
    ```bash
-   claw info smart-file-organizer --permissions
+   claw info cognitive-memory --permissions
    ```
 
 2. **Review the source code** — Is the repository open-source? Can you read the code?
@@ -61,7 +61,7 @@ Before installing any skill, run through this checklist:
 
 4. **Look for community reviews** — Check ClawHub ratings and GitHub issues
 
-5. **Use our security ratings** — Visit the skill page on [openclw.com/skills](/skills) for our independent assessment
+5. **Use our security ratings** — Visit the skill page on [agentclw.com/skills](/skills) for our independent assessment
 
 ## Understanding Permission Levels
 
@@ -88,7 +88,7 @@ claw skills list
 Update a specific skill:
 
 ```bash
-claw skills update smart-file-organizer
+claw skills update cognitive-memory
 ```
 
 Update all skills:
@@ -100,7 +100,7 @@ claw skills update --all
 Remove a skill:
 
 ```bash
-claw skills remove smart-file-organizer
+claw skills remove cognitive-memory
 ```
 
 ## Configuring Skill Permissions
@@ -108,10 +108,10 @@ claw skills remove smart-file-organizer
 You can restrict what a skill can do even after installation:
 
 ```bash
-claw skills config smart-file-organizer --set permissions.network=false
+claw skills config cognitive-memory --set permissions.network=false
 ```
 
-Or edit the skill configuration directly in `~/.config/openclaw/skills/smart-file-organizer/config.yaml`.
+Or edit the skill configuration directly in `~/.config/openclaw/skills/cognitive-memory/config.yaml`.
 
 ## Warning Signs of Malicious Skills
 

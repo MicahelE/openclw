@@ -3,7 +3,7 @@ import { getAllSkills } from "@/lib/skills";
 import { getAllSlugs } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://openclw.com";
+  const baseUrl = "https://agentclw.com";
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1 },

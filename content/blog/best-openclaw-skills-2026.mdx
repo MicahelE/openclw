@@ -2,7 +2,7 @@
 title: "Best OpenClaw Skills in 2026: Our Top Picks (Security Vetted)"
 description: "A curated list of the best OpenClaw skills in 2026, hand-picked and security-vetted by our team. Covers productivity, development, communication, and automation."
 date: "2026-02-18"
-author: "openclw Team"
+author: "agentclw Team"
 tags: ["skills", "recommendations", "2026"]
 category: "skills"
 ---
@@ -11,136 +11,136 @@ category: "skills"
 
 Every skill on this list has been through our security review process. We check source code, analyze permission requests, test in sandboxed environments, and monitor community feedback. Only skills that pass all checks earn our recommendation.
 
-Browse the full directory at [openclw.com/skills](/skills).
+Browse the full directory at [agentclw.com/skills](/skills).
 
 ## Productivity
 
-### Smart File Organizer
+### Cognitive Memory
 
-**Rating: Safe** | by ClawLabs
+**Rating: Safe** | by icemilo414
 
-Automatically sorts files into folders based on content type, date, and custom rules. We love this one because it only requests file system access — no network, no shell execution.
+A persistent memory layer that lets AI agents recall past interactions and build on previous context. Only requires file system access — no network, no shell execution. Essential for long-running projects.
 
 ```bash
-claw install smart-file-organizer
+claw install icemilo414/cognitive-memory
 ```
 
-### Email Summarizer
+### Self Improving Agent
 
-**Rating: Caution** | by InboxZero
+**Rating: Safe** | by pskoett
 
-Connects to your inbox and generates daily digests with priority sorting. The caution rating is because it requires email account access via OAuth — a significant permission, but handled properly through standard OAuth flows.
+Captures learnings, errors, and corrections to enable continuous improvement. Your agent gets smarter over time by tracking what works and what fails. The most popular skill on ClawHub for good reason.
 
 ```bash
-claw install email-summarizer
+claw install pskoett/self-improving-agent
 ```
 
-### Meeting Notes AI
+### Pndr
 
-**Rating: Caution** | by ProductivityAI
+**Rating: Safe** | by dgershman
 
-Transcribes and summarizes meetings with action item extraction. Requires microphone access and meeting platform integration. Great for teams but review the permissions carefully.
+Intelligent note-taking that captures thoughts, generates summaries, and surfaces relevant past notes based on current context. Great for building a personal knowledge base.
 
 ```bash
-claw install meeting-notes-ai
+claw install dgershman/pndr
 ```
 
 ## Development
 
-### Git Autopilot
+### Github
 
-**Rating: Safe** | by DevToolsOrg
+**Rating: Safe** | by steipete
 
-Our top pick for developers. Generates commit messages from diffs, creates PR descriptions, and manages branches intelligently. Only requires Git repository access.
+Our top pick for developers. Full GitHub integration via the gh CLI — manage issues, pull requests, CI runs, and advanced API queries without leaving your terminal. Only requires a GitHub token.
 
 ```bash
-claw install git-autopilot
+claw install steipete/github
 ```
 
-### Code Reviewer Pro
+### PR Reviewer
 
-**Rating: Safe** | by ClawLabs
+**Rating: Safe** | by briancolinger
 
-Automated code review that catches bugs, security issues, and style problems. Runs entirely locally against your repository — no data sent externally.
+Automated pull request review that catches bugs, security issues, and style problems. Posts inline comments directly on GitHub PRs — no data sent anywhere except your own repo.
 
 ```bash
-claw install code-reviewer-pro
+claw install briancolinger/pr-reviewer
 ```
 
-### Log Analyzer
+### Git Essentials
 
-**Rating: Safe** | by DevToolsOrg
+**Rating: Safe** | by arnarsson
 
-AI-powered log analysis that identifies patterns and suggests root causes. Purely read-only file access, making it one of the safest development tools available.
+Streamlined Git workflows with semantic commit messages, smart branch management, and well-structured PR creation. Only requires Git repository access, making it one of the safest dev tools available.
 
 ```bash
-claw install log-analyzer
+claw install arnarsson/git-essentials
 ```
 
 ## Communication
 
-### Slack Notifier
+### Slack
 
-**Rating: Safe** | by MsgConnect
+**Rating: Caution** | by steipete
 
-Simple, reliable Slack notifications with rich formatting and templates. Only needs a webhook URL — minimal permissions and maximum utility.
+Full Slack integration for AI agents. Read channels and DMs, send messages, react to posts, and manage your workspace. The caution rating is due to the Slack bot token and network requirements.
 
 ```bash
-claw install slack-notifier
+claw install steipete/slack
 ```
 
-### Telegram Bot Framework
+### Voice Reply
 
-**Rating: Safe** | by MsgConnect
+**Rating: Safe** | by stolot0mt0m
 
-Build Telegram bots powered by OpenClaw. Clean API, good documentation, and transparent network-only permissions.
+Text-to-speech integration that converts agent responses to natural-sounding voice output. Supports multiple languages and voices with clean, transparent permissions.
 
 ```bash
-claw install telegram-bot-framework
+claw install stolot0mt0m/voice-reply
 ```
 
 ## Automation
 
-### Cron Scheduler
+### Browse
 
-**Rating: Safe** | by AutomateCrew
+**Rating: Caution** | by pkiv
 
-Schedule any OpenClaw task on a cron-like pattern. Includes a monitoring dashboard and failure notifications. A must-have for anyone running automated workflows.
+Web browsing automation for AI agents. Navigate sites, extract content, fill forms, and capture screenshots. The caution rating reflects its network and headless browser access — powerful but review permissions carefully.
 
 ```bash
-claw install cron-scheduler
+claw install pkiv/browse
 ```
 
-### Workflow Automator
+### Deploy Agent
 
-**Rating: Caution** | by AutomateCrew
+**Rating: Caution** | by sherajdev
 
-Build complex multi-step workflows with conditional logic. The caution rating reflects its need for network access and service credentials — necessary for its functionality but worth understanding.
+Automated build, test, and deploy pipeline for cloud providers. Supports Docker, Kubernetes, and serverless with rollback capabilities. Needs cloud credentials, so review the permission scope.
 
 ```bash
-claw install workflow-automator
+claw install sherajdev/deploy-agent
 ```
 
 ## Security
 
-### Vuln Scanner
+### Skill Vetting
 
-**Rating: Safe** | by SecureClawTeam
+**Rating: Safe** | by eddygk
 
-Scan your projects for known vulnerabilities in dependencies and Docker images. Read-only file access plus network for CVE database lookups.
+Scans OpenClaw skill source code for malicious patterns, excessive permissions, and known vulnerabilities. Read-only file access plus network for CVE lookups. A must-have before installing new skills.
 
 ```bash
-claw install vuln-scanner
+claw install eddygk/skill-vetting
 ```
 
-### Secret Rotator
+### Side Peace
 
-**Rating: Safe** | by SecureClawTeam
+**Rating: Safe** | by bitbrujo
 
-Automatically rotate API keys and tokens on a schedule. Despite handling credentials, this tool is well-designed with proper encryption and audit logging.
+A privacy-focused sidecar that monitors AI agent actions in real time. Flags suspicious behavior, blocks unauthorized operations, and maintains a full audit log. Well-designed with minimal permissions.
 
 ```bash
-claw install secret-rotator
+claw install bitbrujo/side-peace
 ```
 
 ## How to Explore More

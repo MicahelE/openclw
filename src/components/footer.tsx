@@ -22,7 +22,7 @@ const footerLinks = [
     links: [
       { href: "https://github.com/openclaw", label: "GitHub" },
       { href: "https://discord.gg/openclaw", label: "Discord" },
-      { href: "https://clawhub.io", label: "ClawHub" },
+      { href: "https://clawhub.ai", label: "ClawHub" },
     ],
   },
 ];
@@ -37,7 +37,7 @@ export function Footer() {
               href="/"
               className="text-xl font-bold text-purple-700 dark:text-purple-400"
             >
-              openclw<span className="text-amber-500">.com</span>
+              agentclw<span className="text-amber-500">.com</span>
             </Link>
             <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
               Curated OpenClaw skills, tutorials, and professional setup
@@ -65,7 +65,7 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-12 border-t border-gray-200 pt-8 text-center text-sm text-gray-500 dark:border-gray-800">
-          &copy; {new Date().getFullYear()} openclw.com. All rights reserved.
+          &copy; {new Date().getFullYear()} agentclw.com. All rights reserved.
           Not affiliated with the OpenClaw project.
         </div>
       </div>
