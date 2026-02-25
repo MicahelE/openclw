@@ -15,12 +15,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
   ];
 
-  const skills = getAllSkills().map((skill) => ({
-    url: `${baseUrl}/skills/${skill.slug}`,
-    lastModified: new Date(skill.updatedAt),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
+  let skills: MetadataRoute.Sitemap = [];
+  try {
+    skills = getAllSkills().map((skill) => ({
+      url: `${baseUrl}/skills/${skill.slug}`,
+      lastModified: new Date(skill.updatedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    // DB not available at build time — skills will appear at runtime
+  }
 
   const tutorials = getAllSlugs("tutorials").map((slug) => ({
     url: `${baseUrl}/tutorials/${slug}`,
