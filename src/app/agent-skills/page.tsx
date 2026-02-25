@@ -5,14 +5,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Agent Skills",
   description:
-    "Browse popular agent skills from skills.sh. Install with a single npx command for Claude Code, Cursor, Copilot, and more.",
+    "Browse popular open-source agent skills. Install with a single npx command for Claude Code, Cursor, Copilot, and more.",
 };
 
 const agentSkills = [
   {
     name: "find-skills",
     repo: "vercel-labs/skills",
-    description: "Discover and install agent skills from the skills.sh directory.",
+    description: "Discover and install agent skills from the open-source directory.",
     installs: "321K",
     tags: ["utility"],
   },
@@ -114,16 +114,7 @@ export default function AgentSkillsPage() {
     <div className="mx-auto max-w-7xl px-6 py-12">
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Agent Skills</h1>
       <p className="mt-3 text-lg text-gray-600 dark:text-gray-400">
-        Popular skills from{" "}
-        <a
-          href="https://skills.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-purple-700 underline hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300"
-        >
-          skills.sh
-        </a>
-        {" "}&mdash; the open agent skills ecosystem by Vercel. Install with a single command for Claude Code, Cursor, Copilot, and more.
+        Popular open-source skills for AI coding agents. Install with a single command for Claude Code, Cursor, Copilot, and more.
       </p>
 
       <div className="mt-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
@@ -137,7 +128,7 @@ export default function AgentSkillsPage() {
         {agentSkills.map((skill) => (
           <Card
             key={`${skill.repo}/${skill.name}`}
-            href={`https://skills.sh/${skill.repo}/${skill.name}`}
+            href={`https://github.com/${skill.repo}`}
             className="flex flex-col"
           >
             <div className="flex items-start justify-between gap-2">
@@ -169,7 +160,7 @@ export default function AgentSkillsPage() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-lg bg-purple-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-purple-800"
         >
-          Browse all skills on skills.sh &rarr;
+          Browse all agent skills &rarr;
         </a>
       </div>
     </div>
