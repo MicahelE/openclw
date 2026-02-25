@@ -36,7 +36,7 @@ sqlite.exec(`
     clawhub_url TEXT,
     security_rating TEXT NOT NULL DEFAULT 'caution',
     permissions_required TEXT,
-    install_command TEXT,
+
     featured INTEGER DEFAULT 0,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
@@ -122,7 +122,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/icemilo414/cognitive-memory",
     securityRating: "safe",
     permissionsRequired: "File system read/write",
-    installCommand: "claw install icemilo414/cognitive-memory",
+
     featured: 1,
   },
   {
@@ -138,7 +138,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/pskoett/self-improving-agent",
     securityRating: "safe",
     permissionsRequired: "File system read/write",
-    installCommand: "claw install pskoett/self-improving-agent",
+
     featured: 0,
   },
   {
@@ -154,12 +154,12 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/dgershman/pndr",
     securityRating: "safe",
     permissionsRequired: "File system read/write",
-    installCommand: "claw install dgershman/pndr",
+
     featured: 0,
   },
   // --- Development ---
   {
-    name: "Github",
+    name: "GitHub",
     slug: "github",
     description:
       "Interact with GitHub using the gh CLI. Use gh issue, gh pr, gh run, and gh api for issues, pull requests, CI runs, and advanced queries. Streamlines the entire GitHub workflow from your terminal.",
@@ -171,7 +171,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/steipete/github",
     securityRating: "safe",
     permissionsRequired: "GitHub API token, network access",
-    installCommand: "claw install steipete/github",
+
     featured: 1,
   },
   {
@@ -187,7 +187,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/briancolinger/pr-reviewer",
     securityRating: "safe",
     permissionsRequired: "Repository read access, GitHub API token",
-    installCommand: "claw install briancolinger/pr-reviewer",
+
     featured: 1,
   },
   {
@@ -203,7 +203,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/cmanfre7/debug-pro",
     securityRating: "safe",
     permissionsRequired: "File system read, process inspection",
-    installCommand: "claw install cmanfre7/debug-pro",
+
     featured: 0,
   },
   {
@@ -219,7 +219,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/arnarsson/git-essentials",
     securityRating: "safe",
     permissionsRequired: "Git repository access",
-    installCommand: "claw install arnarsson/git-essentials",
+
     featured: 1,
   },
   {
@@ -235,7 +235,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/charmmm718/backend-patterns",
     securityRating: "safe",
     permissionsRequired: "File system read/write",
-    installCommand: "claw install charmmm718/backend-patterns",
+
     featured: 0,
   },
   // --- Communication ---
@@ -252,7 +252,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/steipete/slack",
     securityRating: "caution",
     permissionsRequired: "Slack bot token, network access",
-    installCommand: "claw install steipete/slack",
+
     featured: 0,
   },
   {
@@ -268,7 +268,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/stolot0mt0m/voice-reply",
     securityRating: "safe",
     permissionsRequired: "Audio output, network access for TTS API",
-    installCommand: "claw install stolot0mt0m/voice-reply",
+
     featured: 0,
   },
   // --- Automation ---
@@ -285,7 +285,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/pkiv/browse",
     securityRating: "caution",
     permissionsRequired: "Network access, headless browser",
-    installCommand: "claw install pkiv/browse",
+
     featured: 1,
   },
   {
@@ -301,7 +301,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/sherajdev/deploy-agent",
     securityRating: "caution",
     permissionsRequired: "Cloud provider credentials, Docker access, network access",
-    installCommand: "claw install sherajdev/deploy-agent",
+
     featured: 0,
   },
   {
@@ -317,7 +317,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/gitgoodordietrying/docker-sandbox",
     securityRating: "caution",
     permissionsRequired: "Docker socket access",
-    installCommand: "claw install gitgoodordietrying/docker-sandbox",
+
     featured: 0,
   },
   // --- Security ---
@@ -334,7 +334,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/eddygk/skill-vetting",
     securityRating: "safe",
     permissionsRequired: "File system read, network access for CVE database",
-    installCommand: "claw install eddygk/skill-vetting",
+
     featured: 1,
   },
   {
@@ -350,7 +350,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/bitbrujo/side-peace",
     securityRating: "safe",
     permissionsRequired: "Process monitoring, file system write for audit logs",
-    installCommand: "claw install bitbrujo/side-peace",
+
     featured: 0,
   },
   {
@@ -366,7 +366,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/gitgoodordietrying/emergency-rescue",
     securityRating: "safe",
     permissionsRequired: "Process management, file system read/write",
-    installCommand: "claw install gitgoodordietrying/emergency-rescue",
+
     featured: 0,
   },
   // --- Data & Analytics ---
@@ -383,7 +383,7 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/whiteknight07/exa-web-search-free",
     securityRating: "safe",
     permissionsRequired: "Network access",
-    installCommand: "claw install whiteknight07/exa-web-search-free",
+
     featured: 0,
   },
   {
@@ -399,14 +399,14 @@ const skillData = [
     clawhubUrl: "https://clawhub.ai/tarigha/financial-calculator",
     securityRating: "safe",
     permissionsRequired: "None",
-    installCommand: "claw install tarigha/financial-calculator",
+
     featured: 0,
   },
 ];
 
 for (const s of skillData) {
-  db.run(sql`INSERT INTO skills (name, slug, description, short_description, author, category_slug, github_url, clawhub_url, security_rating, permissions_required, install_command, featured, created_at, updated_at)
-    VALUES (${s.name}, ${s.slug}, ${s.description}, ${s.shortDescription}, ${s.author}, ${s.categorySlug}, ${s.githubUrl}, ${s.clawhubUrl}, ${s.securityRating}, ${s.permissionsRequired}, ${s.installCommand}, ${s.featured}, ${now}, ${now})
+  db.run(sql`INSERT INTO skills (name, slug, description, short_description, author, category_slug, github_url, clawhub_url, security_rating, permissions_required, featured, created_at, updated_at)
+    VALUES (${s.name}, ${s.slug}, ${s.description}, ${s.shortDescription}, ${s.author}, ${s.categorySlug}, ${s.githubUrl}, ${s.clawhubUrl}, ${s.securityRating}, ${s.permissionsRequired}, ${s.featured}, ${now}, ${now})
     ON CONFLICT(slug) DO UPDATE SET
       name = excluded.name,
       description = excluded.description,
@@ -417,7 +417,6 @@ for (const s of skillData) {
       clawhub_url = excluded.clawhub_url,
       security_rating = excluded.security_rating,
       permissions_required = excluded.permissions_required,
-      install_command = excluded.install_command,
       featured = excluded.featured,
       updated_at = excluded.updated_at`);
 }

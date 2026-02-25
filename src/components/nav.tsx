@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const links = [
   { href: "/skills", label: "Skills" },
+  { href: "/agent-skills", label: "Agent Skills" },
   { href: "/tutorials", label: "Tutorials" },
   { href: "/blog", label: "Blog" },
   { href: "/setup-service", label: "Setup Service" },

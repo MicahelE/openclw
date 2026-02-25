@@ -82,14 +82,6 @@ export default async function SkillDetailPage({
           </section>
         )}
 
-        {skill.installCommand && (
-          <section>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Installation</h2>
-            <pre className="mt-3 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-green-400">
-              <code>{skill.installCommand}</code>
-            </pre>
-          </section>
-        )}
 
         <section className="flex flex-wrap gap-3">
           {skill.githubUrl && (

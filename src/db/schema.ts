@@ -26,7 +26,7 @@ export const skills = sqliteTable("skills", {
     .notNull()
     .default("caution"),
   permissionsRequired: text("permissions_required"),
-  installCommand: text("install_command"),
+
   featured: integer("featured", { mode: "boolean" }).default(false),
   createdAt: text("created_at")
     .notNull()
